@@ -769,7 +769,9 @@ class SettingsManager(dict):
             'neptune': True,
             'raytune': True,
             'tensorboard': True,
-            'wandb': True}
+            'wandb': True,
+            'raw_frames_dir': 'images'
+        }
 
         super().__init__(copy.deepcopy(self.defaults))
 

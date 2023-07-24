@@ -361,12 +361,12 @@ class BasePredictor:
         self.callbacks[event].append(func)
 
     def do_save_raw_frames(self, im0s):
-        output_dir = self.save_dir / 'raw_frames'
+        output_dir = self.save_dir / SETTINGS.defaults['raw_frames_dir']
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         for idx, frame in enumerate(im0s):
             out_path = str(output_dir / \
-                f'{os.path.basename(self.data_path).split(".")[0]}_frame_{self.dataset.frame}.jpg')
+                f'{os.path.basename(self.data_path).split(".")[0]}_{self.dataset.frame}.jpg')
             cv2.imwrite(out_path, frame)
 
 
