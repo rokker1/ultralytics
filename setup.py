@@ -48,7 +48,7 @@ setup(
             'mkdocs-redirects',  # for 301 redirects
             'mkdocs-ultralytics-plugin>=0.0.21',  # for meta descriptions and images, dates and authors
         ],
-        'export': ['coremltools>=6.0,<=6.2', 'openvino-dev>=2023.0',
+        'export': ['coremltools>=6.0,<=6.3.0', 'openvino-dev>=2023.0',
                    'tensorflowjs'],  # automatically installs tensorflow
     },
     classifiers=[
