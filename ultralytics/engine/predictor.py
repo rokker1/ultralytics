@@ -27,6 +27,8 @@ Usage - formats:
                               yolov8n_edgetpu.tflite     # TensorFlow Edge TPU
                               yolov8n_paddle_model       # PaddlePaddle
 """
+
+import os
 import platform
 from pathlib import Path
 
@@ -274,6 +276,8 @@ class BasePredictor:
                     self.show(p)
                 if self.args.save and self.plotted_img is not None:
                     self.save_preds(vid_cap, i, str(self.save_dir / p.name))
+                if self.args.save_raw_frames:
+                    self.do_save_raw_frames(im0s)
 
             self.run_callbacks('on_predict_batch_end')
             yield from self.results
@@ -355,3 +359,14 @@ class BasePredictor:
         Add callback
         """
         self.callbacks[event].append(func)
+
+    def do_save_raw_frames(self, im0s):
+        output_dir = self.save_dir / 'raw_frames'
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        for idx, frame in enumerate(im0s):
+            out_path = str(output_dir / \
+                f'{os.path.basename(self.data_path).split(".")[0]}_frame_{self.dataset.frame}.jpg')
+            cv2.imwrite(out_path, frame)
+
+
